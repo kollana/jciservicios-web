@@ -35,7 +35,7 @@ export function Hero() {
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-6 mt-12 items-start">
-              <p className="text-muted text-sm leading-relaxed max-w-sm max-sm:max-w-[360px]">
+              <p className="text-muted text-sm leading-relaxed max-w-90">
                 Infraestructura y medios tecnológicos con capacidad para diseñar, proveer e instalar soluciones en Sistemas Eléctricos.
               </p>
               <div className="flex gap-4 sm:ml-auto shrink-0">
