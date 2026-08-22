@@ -27,15 +27,15 @@ export function Hero() {
 
             <h1
               style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.01em' }}
-              className="text-[clamp(4rem,12vw,10rem)] uppercase text-chalk max-sm:max-w-xs"
+              className="text-[clamp(4rem,12vw,10rem)] uppercase text-chalk"
             >
-              Infraestructura<br />
+              Soluciones<br />
               <span className="text-volt">Para</span><br />
               no detenerse.
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-6 mt-12 items-start">
-              <p className="text-muted text-sm leading-relaxed max-w-sm max-sm:max-w-xs">
+              <p className="text-muted text-sm leading-relaxed max-w-sm max-sm:max-w-84">
                 Infraestructura y medios tecnológicos con capacidad para diseñar, proveer e instalar soluciones en Sistemas Eléctricos.
               </p>
               <div className="flex gap-4 sm:ml-auto shrink-0">
