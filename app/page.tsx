@@ -1,69 +1,291 @@
-import Image from "next/image";
+"use client"
+
+import { Header } from "@/components/layout/header";
+import { Hero } from "@/components/hero";
+import { Services } from "@/components/services";
+
+const PROJECTS = [
+  {
+    id: "621905251189",
+    title: "Northgate Industrial Complex",
+    category: "Industrial Wiring",
+    year: "2024",
+    img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop&auto=format",
+  },
+  {
+    id: "473341304170",
+    title: "Kellner Power Grid Extension",
+    category: "Power Distribution",
+    year: "2023",
+    img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=600&fit=crop&auto=format",
+  },
+  {
+    id: "1555963966",
+    title: "Meridian Data Center",
+    category: "Emergency Systems",
+    year: "2024",
+    img: "https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?w=800&h=600&fit=crop&auto=format",
+  },
+  {
+    id: "1758101755915",
+    title: "Halcyon Office Tower",
+    category: "Building Automation",
+    year: "2023",
+    img: "https://images.unsplash.com/photo-1758101755915-462eddc23f57?w=800&h=600&fit=crop&auto=format",
+  },
+];
+
+const SERVICES = [
+  {
+    number: "01",
+    title: "Industrial Wiring",
+    desc: "Complete electrical infrastructure for factories, warehouses, and heavy-duty facilities. Engineered for maximum load capacity and long-term reliability.",
+  },
+  {
+    number: "02",
+    title: "Power Distribution",
+    desc: "High-voltage switchgear, transformer installation, and MV/LV distribution panel design. Compliant with IEC and NEC standards.",
+  },
+  {
+    number: "03",
+    title: "Building Automation",
+    desc: "Intelligent building systems integrating lighting control, HVAC, security, and energy monitoring on a unified platform.",
+  },
+  {
+    number: "04",
+    title: "Emergency Systems",
+    desc: "UPS, standby generators, fire alarm wiring, and emergency lighting. Certified installation and mandatory testing protocols.",
+  },
+  {
+    number: "05",
+    title: "Solar & Renewables",
+    desc: "Grid-tied and off-grid PV systems, battery storage solutions, and EV charging infrastructure at commercial scale.",
+  },
+  {
+    number: "06",
+    title: "Maintenance & Audit",
+    desc: "Thermographic inspection, power quality analysis, periodic testing, and full compliance documentation.",
+  },
+];
+
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-ground text-chalk" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <Header />
+      <Hero />
+      <Services />
+      {/* ── PROJECTS ── */}
+      <section id="projects" className="px-8 md:px-16 py-28 border-t border-rule">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-volt mb-4">Selected Work</p>
+            <h2
+              style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, lineHeight: 1 }}
+              className="text-[clamp(2.5rem,6vw,5rem)] uppercase"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Featured<br />Projects
+            </h2>
+          </div>
+          <a href="#contact" className="text-[11px] font-medium tracking-[0.15em] uppercase text-muted hover:text-volt transition-colors self-start md:self-end">
+            All Projects →
+          </a>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule">
+          {PROJECTS.map((p) => (
+            <div key={p.id} className="relative overflow-hidden group bg-ground cursor-pointer" style={{ aspectRatio: '4/3' }}>
+              <img
+                src={p.img}
+                alt={p.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
+              />
+              <div className="absolute inset-0 flex flex-col justify-end p-8">
+                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-volt mb-2">{p.category} — {p.year}</span>
+                <h3
+                  style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, lineHeight: 1.05 }}
+                  className="text-3xl uppercase text-chalk"
+                >
+                  {p.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── ABOUT ── */}
+      <section id="about" className="border-t border-rule">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="px-8 md:px-16 py-28">
+            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-volt  mb-4">Who We Are</p>
+            <h2
+              style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, lineHeight: 1 }}
+              className="text-[clamp(2.5rem,5vw,4.5rem)] uppercase mb-8"
+            >
+              Engineering<br />Without<br />Compromise
+            </h2>
+            <p className="text-muted text-sm leading-relaxed mb-6 max-w-md">
+              Founded in 1996, Voltex has grown from a regional contractor into an international electrical engineering firm serving industries across 12 countries. Our team of 340+ certified engineers brings precision to every kilowatt.
+            </p>
+            <p className="text-muted text-sm leading-relaxed max-w-md">
+              We hold ISO 9001 quality certification, NFPA 70E compliance, and maintain an unblemished safety record across 28 consecutive years of operation.
+            </p>
+
+            <div className="mt-12 grid grid-cols-2 gap-8">
+              {[
+                { label: "ISO 9001", sub: "Quality Certified" },
+                { label: "NFPA 70E", sub: "Safety Compliant" },
+                { label: "340+", sub: "Engineers on Staff" },
+                { label: "24 / 7", sub: "Emergency Response" },
+              ].map((item, i) => (
+                <div key={i} className="border-l-2 border-volt pl-4">
+                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700 }} className="text-xl uppercase text-chalk">
+                    {item.label}
+                  </div>
+                  <div className="text-[11px] tracking-widest uppercase text-muted mt-0.5">{item.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden min-h-100 lg:min-h-0">
+            <img
+              src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=900&h=900&fit=crop&auto=format"
+              alt="Voltex engineer at work"
+              className="w-full h-full object-cover opacity-50"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="absolute bottom-8 left-8 right-8">
+              <div className="bg-volt px-6 py-4 inline-block">
+                <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800 }} className="text-ground text-lg uppercase tracking-wide">
+                  Zero lost-time injuries<br />in 2023 — 2024
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* ── CTA BAND ── */}
+      <section className="border-t border-rule bg-volt px-8 md:px-16 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        <h2
+          style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, lineHeight: 1 }}
+          className="text-[clamp(2rem,5vw,4rem)] uppercase text-ground"
+        >
+          Ready to Power<br />Your Next Project?
+        </h2>
+        <a
+          href="#contact"
+          className="shrink-0 px-10 py-5 bg-[#080808] text-[#f5f5f0] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#1a1a1a] transition-colors"
+        >
+          Contact Our Team
+        </a>
+      </section>
+
+      {/* ── CONTACT ── */}
+      <section id="contact" className="px-8 md:px-16 py-28 border-t border-[#2a2a2a]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div>
+            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-[#e8f000] mb-4">Get in Touch</p>
+            <h2
+              style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, lineHeight: 1 }}
+              className="text-[clamp(2.5rem,5vw,4.5rem)] uppercase mb-8"
+            >
+              Start a<br />Conversation
+            </h2>
+            <div className="flex flex-col gap-6">
+              {[
+                { label: "Headquarters", value: "14 Ampere Boulevard, Suite 800\nCharlotte, NC 28202" },
+                { label: "General Enquiries", value: "enquiries@voltex-eng.com" },
+                { label: "Emergency Line", value: "+1 (800) 556-2490" },
+                { label: "Operating Hours", value: "Mon–Fri 07:00–18:00\nEmergency: 24 / 7" },
+              ].map((item) => (
+                <div key={item.label} className="border-b border-[#2a2a2a] pb-6">
+                  <div className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-1">{item.label}</div>
+                  <div className="text-sm text-[#f5f5f0] whitespace-pre-line">{item.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Name</label>
+                <input
+                  type="text"
+                  placeholder="Jane Smith"
+                  className="w-full bg-[#111111] border border-[#2a2a2a] px-4 py-3 text-sm text-[#f5f5f0] placeholder-[#3a3a3a] focus:outline-none focus:border-[#e8f000] transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Company</label>
+                <input
+                  type="text"
+                  placeholder="Acme Industries"
+                  className="w-full bg-[#111111] border border-[#2a2a2a] px-4 py-3 text-sm text-[#f5f5f0] placeholder-[#3a3a3a] focus:outline-none focus:border-[#e8f000] transition-colors"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Email</label>
+              <input
+                type="email"
+                placeholder="jane@acme.com"
+                className="w-full bg-[#111111] border border-[#2a2a2a] px-4 py-3 text-sm text-[#f5f5f0] placeholder-[#3a3a3a] focus:outline-none focus:border-[#e8f000] transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Service Required</label>
+              <select className="w-full bg-[#111111] border border-[#2a2a2a] px-4 py-3 text-sm text-[#6b6b6b] focus:outline-none focus:border-[#e8f000] transition-colors appearance-none">
+                <option value="">Select a service</option>
+                {SERVICES.map((s) => <option key={s.number} value={s.title}>{s.title}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Project Brief</label>
+              <textarea
+                rows={5}
+                placeholder="Describe your project scope, timeline, and requirements..."
+                className="w-full bg-[#111111] border border-[#2a2a2a] px-4 py-3 text-sm text-[#f5f5f0] placeholder-[#3a3a3a] focus:outline-none focus:border-[#e8f000] transition-colors resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-4 bg-[#e8f000] text-[#080808] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#f5f5f0] transition-colors"
+            >
+              Submit Enquiry
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-[#2a2a2a] px-8 md:px-16 py-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-5 h-5 bg-[#e8f000] flex items-center justify-center">
+              <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+                <path d="M8 1L2 8h5l-1 5 6-7H7L8 1z" fill="#080808"/>
+              </svg>
+            </div>
+            <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.1em' }} className="text-sm uppercase">
+              Voltex<span className="text-[#e8f000]">.</span>
+            </span>
+          </div>
+          <p className="text-[11px] tracking-widest uppercase text-[#3a3a3a]">
+            © 2026 Voltex Engineering. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            {["Privacy", "Legal", "Certifications"].map((l) => (
+              <a key={l} href="#" className="text-[11px] tracking-widest uppercase text-[#3a3a3a] hover:text-[#6b6b6b] transition-colors">
+                {l}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }
