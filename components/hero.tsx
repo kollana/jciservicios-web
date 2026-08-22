@@ -21,13 +21,13 @@ export function Hero() {
 
         <div className="relative z-10 flex-1 flex items-center px-8 md:px-16 pt-12">
           <div className="max-w-5xl">
-            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-volt mb-8">
+            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-volt mb-8 max-sm:max-w-xs">
               Más de 10 años de experiencia en el rubro.
             </p>
 
             <h1
               style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.01em' }}
-              className="text-[clamp(4rem,12vw,10rem)] uppercase text-chalk"
+              className="text-[clamp(4rem,12vw,10rem)] uppercase text-chalk max-sm:max-w-xs"
             >
               Infraestructura<br />
               <span className="text-volt">Para</span><br />
@@ -35,7 +35,7 @@ export function Hero() {
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-6 mt-12 items-start">
-              <p className="text-muted text-sm leading-relaxed max-w-sm">
+              <p className="text-muted text-sm leading-relaxed max-w-sm max-sm:max-w-xs">
                 Infraestructura y medios tecnológicos con capacidad para diseñar, proveer e instalar soluciones en Sistemas Eléctricos.
               </p>
               <div className="flex gap-4 sm:ml-auto shrink-0">
