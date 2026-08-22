@@ -35,21 +35,21 @@ export function Hero() {
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-6 mt-12 items-start">
-              <p className="text-muted text-sm leading-relaxed max-w-md">
-                Contamos con la infraestructura y medios tecnológicos necesarios con capacidad para diseñar, proveer e instalar soluciones en Sistemas Eléctricos.
+              <p className="text-muted text-sm leading-relaxed max-w-sm">
+                Infraestructura y medios tecnológicos con capacidad para diseñar, proveer e instalar soluciones en Sistemas Eléctricos.
               </p>
               <div className="flex gap-4 sm:ml-auto shrink-0">
                 <a
                   href="#services"
                   className="px-8 py-4 bg-volt text-ground text-xs font-bold tracking-[0.15em] uppercase hover:bg-chalk transition-colors"
                 >
-                  Nuestros servicios
+                  Servicios
                 </a>
                 <a
                   href="#projects"
                   className="px-8 py-4 border border-rule text-xs font-medium tracking-[0.15em] uppercase text-muted hover:border-chalk hover:text-chalk transition-colors"
                 >
-                  Ver proyectos
+                  Proyectos
                 </a>
               </div>
             </div>
