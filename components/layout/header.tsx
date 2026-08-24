@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 
-const NAV_LINKS = ["Servicios", "Proyectos", "Nostros", "Contactos"];
+const NAV_LINKS = [
+  { label: "Services", href: "#services" },
+  { label: "Projects", href: "#projects" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,18 +26,18 @@ export function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-10">
-          {NAV_LINKS.map((l) => (
+          {NAV_LINKS.map((link) => (
             <a
-              key={l}
-              href={`#${l.toLowerCase()}`}
-              className="text-[11px] font-medium tracking-[0.15em] uppercase text-muted hover:text-chalk transition-colors duration-200"
+              key={link.label}
+              href={link.href}
+              className="relative text-[11px] font-medium tracking-[0.15em] uppercase text-muted transition-colors duration-200 after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-volt after:transition-transform after:duration-200 hover:text-chalk hover:after:scale-x-100"
             >
-              {l}
+              {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="text-[11px] font-semibold tracking-[0.15em] uppercase px-5 py-2.5 bg-volt text-ground hover:bg-chalk transition-colors duration-200"
+            className="text-[11px] font-semibold tracking-[0.15em] uppercase px-5 py-2.5 bg-volt text-ground transition-all duration-200 hover:bg-chalk hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,240,0,0.18)]"
           >
             Contactar ahora
           </a>
@@ -50,14 +55,14 @@ export function Header() {
 
         {mobileOpen && (
           <div className="absolute top-16 left-0 right-0 bg-surface border-b border-rule py-6 flex flex-col gap-4 px-8">
-            {NAV_LINKS.map((l) => (
+            {NAV_LINKS.map((link) => (
               <a
-                key={l}
-                href={`#${l.toLowerCase()}`}
+                key={link.label}
+                href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm font-medium tracking-[0.15em] uppercase text-muted hover:text-chalk transition-colors"
+                className="relative text-sm font-medium tracking-[0.15em] uppercase text-muted transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-12 after:origin-left after:scale-x-0 after:bg-volt after:transition-transform after:duration-200 hover:text-chalk hover:after:scale-x-100"
               >
-                {l}
+                {link.label}
               </a>
             ))}
           </div>
