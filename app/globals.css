@@ -58,3 +58,18 @@ body {
   background: #e8f000;
   margin-top: 16px;
 }
+
+@keyframes service-content-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-content-transition {
+  animation: service-content-reveal 500ms ease-out both;
+}

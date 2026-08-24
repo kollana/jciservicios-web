@@ -1,6 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/hero";
 import { Services } from "@/components/services";
 
@@ -68,6 +70,57 @@ const SERVICES = [
   },
 ];
 
+function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; index: number }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const card = document.getElementById(`project-${project.id}`);
+    if (!card) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, [project.id]);
+
+  return (
+    <div
+      id={`project-${project.id}`}
+      className={`relative transition-all duration-700 ease-out ${
+        isVisible
+          ? "translate-x-0 opacity-100"
+          : index % 2 === 0
+            ? "-translate-x-16 opacity-0"
+            : "translate-x-16 opacity-0"
+      } aspect-4/3 md:aspect-auto ${index === 0 || index === 3 ? "md:col-span-7" : "md:col-span-5"}`}
+    >
+      <div className="relative h-full overflow-hidden group bg-ground cursor-pointer">
+        <img
+          src={project.img}
+          alt={project.title}
+          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-75"
+        />
+        <div className="absolute inset-0 flex flex-col justify-end p-8">
+          <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-volt mb-2">{project.category} — {project.year}</span>
+          <h3
+            style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, lineHeight: 1.05 }}
+            className="text-3xl uppercase text-chalk transition-transform duration-300 group-hover:translate-x-2"
+          >
+            {project.title}
+          </h3>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -76,40 +129,25 @@ export default function Home() {
       <Hero />
       <Services />
       {/* ── PROJECTS ── */}
-      <section id="projects" className="px-8 md:px-16 py-28 border-t border-rule">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <section id="projects" className="px-8 md:px-16 pt-28 pb-44 border-t border-rule">
+        <div className="flex flex-col items-center text-center mb-16 gap-6">
           <div>
             <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-volt mb-4">Selected Work</p>
             <h2
               style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, lineHeight: 1 }}
               className="text-[clamp(2.5rem,6vw,5rem)] uppercase"
             >
-              Featured<br />Projects
+              Featured Projects
             </h2>
           </div>
-          <a href="#contact" className="text-[11px] font-medium tracking-[0.15em] uppercase text-muted hover:text-volt transition-colors self-start md:self-end">
+          <a href="#contact" className="text-[11px] font-medium tracking-[0.15em] uppercase text-muted hover:text-volt transition-colors">
             All Projects →
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule">
-          {PROJECTS.map((p) => (
-            <div key={p.id} className="relative overflow-hidden group bg-ground cursor-pointer" style={{ aspectRatio: '4/3' }}>
-              <img
-                src={p.img}
-                alt={p.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
-              />
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-volt mb-2">{p.category} — {p.year}</span>
-                <h3
-                  style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, lineHeight: 1.05 }}
-                  className="text-3xl uppercase text-chalk"
-                >
-                  {p.title}
-                </h3>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 md:auto-rows-[minmax(260px,30vw)] gap-4">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </section>
@@ -153,7 +191,7 @@ export default function Home() {
             <img
               src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=900&h=900&fit=crop&auto=format"
               alt="Voltex engineer at work"
-              className="w-full h-full object-cover opacity-50"
+              className="w-full h-full object-cover opacity-65"
             />
             <div className="absolute bottom-8 left-8 right-8">
               <div className="bg-volt px-6 py-4 inline-block">
@@ -167,42 +205,61 @@ export default function Home() {
       </section>
 
       {/* ── CTA BAND ── */}
-      <section className="border-t border-rule bg-volt px-8 md:px-16 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+      <section className="relative isolate overflow-hidden border-t border-rule bg-volt px-8 py-16 md:px-16">
+        <div className="absolute inset-y-0 right-0 hidden w-[58%] md:block">
+          <img
+            src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=500&fit=crop&auto=format"
+            alt="Electrical power infrastructure"
+            className="h-full w-full object-cover object-center opacity-80"
+          />
+          <div className="absolute inset-0 bg-linear-to-r from-volt via-volt/85 to-transparent" />
+        </div>
+        <div className="relative z-10 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
         <h2
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, lineHeight: 1 }}
           className="text-[clamp(2rem,5vw,4rem)] uppercase text-ground"
         >
-          Ready to Power<br />Your Next Project?
+          Ready to power<br />your next project?
         </h2>
         <a
           href="#contact"
           className="shrink-0 px-10 py-5 bg-[#080808] text-[#f5f5f0] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#1a1a1a] transition-colors"
         >
-          Contact Our Team
+          Contact our team
         </a>
+        </div>
       </section>
 
       {/* ── CONTACT ── */}
       <section id="contact" className="px-8 md:px-16 py-28 border-t border-[#2a2a2a]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
-            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-[#e8f000] mb-4">Get in Touch</p>
+            <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-[#e8f000] mb-4">Get in touch</p>
             <h2
               style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, lineHeight: 1 }}
-              className="text-[clamp(2.5rem,5vw,4.5rem)] uppercase mb-8"
+              className="text-[clamp(2.5rem,5vw,4.5rem)] uppercase mb-6"
             >
-              Start a<br />Conversation
+              Start a conversation
             </h2>
-            <div className="flex flex-col gap-6">
+            <p className="max-w-md text-sm leading-relaxed text-muted mb-10">
+              Tell us what you are building, and our engineering team will help you define the right electrical solution.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8">
               {[
-                { label: "Headquarters", value: "14 Ampere Boulevard, Suite 800\nCharlotte, NC 28202" },
-                { label: "General Enquiries", value: "enquiries@voltex-eng.com" },
-                { label: "Emergency Line", value: "+1 (800) 556-2490" },
-                { label: "Operating Hours", value: "Mon–Fri 07:00–18:00\nEmergency: 24 / 7" },
+                { label: "Headquarters", value: "14 Ampere Boulevard, Suite 800\nCharlotte, NC 28202", href: "#contact" },
+                { label: "General enquiries", value: "enquiries@voltex-eng.com", href: "mailto:enquiries@voltex-eng.com" },
+                { label: "Emergency line", value: "+1 (800) 556-2490", href: "tel:+18005562490" },
+                { label: "Operating hours", value: "Mon–Fri 07:00–18:00\nEmergency: 24 / 7" },
               ].map((item) => (
-                <div key={item.label} className="border-b border-[#2a2a2a] pb-6">
-                  <div className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-1">{item.label}</div>
-                  <div className="text-sm text-[#f5f5f0] whitespace-pre-line">{item.value}</div>
+                <div key={item.label} className={`border-t border-[#2a2a2a] pt-4 ${item.label === "Emergency line" ? "border-t-[#e8f000]" : ""}`}>
+                  <div className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">{item.label}</div>
+                  {item.href ? (
+                    <a href={item.href} className={`text-sm whitespace-pre-line transition-colors hover:text-[#e8f000] ${item.label === "Emergency line" ? "text-[#e8f000]" : "text-[#f5f5f0]"}`}>
+                      {item.value}
+                    </a>
+                  ) : (
+                    <div className="text-sm text-[#f5f5f0] whitespace-pre-line">{item.value}</div>
+                  )}
                 </div>
               ))}
             </div>
@@ -236,14 +293,14 @@ export default function Home() {
               />
             </div>
             <div>
-              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Service Required</label>
+              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Service required</label>
               <select className="w-full bg-[#111111] border border-[#2a2a2a] px-4 py-3 text-sm text-[#6b6b6b] focus:outline-none focus:border-[#e8f000] transition-colors appearance-none">
                 <option value="">Select a service</option>
                 {SERVICES.map((s) => <option key={s.number} value={s.title}>{s.title}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Project Brief</label>
+              <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6b6b6b] mb-2">Project brief</label>
               <textarea
                 rows={5}
                 placeholder="Describe your project scope, timeline, and requirements..."
@@ -254,37 +311,13 @@ export default function Home() {
               type="submit"
               className="w-full py-4 bg-[#e8f000] text-[#080808] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#f5f5f0] transition-colors"
             >
-              Submit Enquiry
+              Submit enquiry
             </button>
           </form>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="border-t border-[#2a2a2a] px-8 md:px-16 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-5 h-5 bg-[#e8f000] flex items-center justify-center">
-              <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
-                <path d="M8 1L2 8h5l-1 5 6-7H7L8 1z" fill="#080808"/>
-              </svg>
-            </div>
-            <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.1em' }} className="text-sm uppercase">
-              Voltex<span className="text-[#e8f000]">.</span>
-            </span>
-          </div>
-          <p className="text-[11px] tracking-widest uppercase text-[#3a3a3a]">
-            © 2026 Voltex Engineering. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            {["Privacy", "Legal", "Certifications"].map((l) => (
-              <a key={l} href="#" className="text-[11px] tracking-widest uppercase text-[#3a3a3a] hover:text-[#6b6b6b] transition-colors">
-                {l}
-              </a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
     </div>
   );
